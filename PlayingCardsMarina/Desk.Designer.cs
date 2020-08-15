@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Desk));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.LoadCards = new System.Windows.Forms.ToolStripButton();
+            this.StackCards = new System.Windows.Forms.ToolStripButton();
+            this.DeckCards = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -38,7 +40,9 @@
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LoadCards});
+            this.LoadCards,
+            this.StackCards,
+            this.DeckCards});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 38);
@@ -54,6 +58,26 @@
             this.LoadCards.Size = new System.Drawing.Size(105, 33);
             this.LoadCards.Text = "Load Cards";
             this.LoadCards.Click += new System.EventHandler(this.LoadCards_Click);
+            // 
+            // StackCards
+            // 
+            this.StackCards.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.StackCards.Image = ((System.Drawing.Image)(resources.GetObject("StackCards.Image")));
+            this.StackCards.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.StackCards.Name = "StackCards";
+            this.StackCards.Size = new System.Drawing.Size(57, 33);
+            this.StackCards.Text = "Stack";
+            this.StackCards.Click += new System.EventHandler(this.StackCards_Click);
+            // 
+            // DeckCards
+            // 
+            this.DeckCards.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.DeckCards.Image = ((System.Drawing.Image)(resources.GetObject("DeckCards.Image")));
+            this.DeckCards.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DeckCards.Name = "DeckCards";
+            this.DeckCards.Size = new System.Drawing.Size(55, 33);
+            this.DeckCards.Text = "Deck";
+            this.DeckCards.Click += new System.EventHandler(this.DeckCards_Click);
             // 
             // Desk
             // 
@@ -74,6 +98,8 @@
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton LoadCards;
+        private System.Windows.Forms.ToolStripButton StackCards;
+        private System.Windows.Forms.ToolStripButton DeckCards;
     }
 }
 
