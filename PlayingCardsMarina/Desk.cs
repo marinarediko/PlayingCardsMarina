@@ -20,12 +20,13 @@ namespace PlayingCardsMarina
         private bool mouseHold = false;
         private int deltaX;
         private int deltaY;
+        private bool cardsFlipped = false;
 
         private string folderPath = null;
         private string [] fileNames = null;
         private Random rand = new Random();
         private List<PictureBox> cards= new List<PictureBox>();
-
+        private List<string> filePaths = new List<string>();
 
         public Desk()
         {
@@ -70,7 +71,7 @@ namespace PlayingCardsMarina
 
             foreach(var fileName in fileNames)
             {
-
+                filePaths.Add(fileName);
                 filePictureBox = new PictureBox()
                 {
                     Height = 90,
@@ -80,7 +81,7 @@ namespace PlayingCardsMarina
                     Top = rand.Next(50,500),
                     Image = Image.FromFile(fileName)
                 };
-                //filePictureBox.Click += Card_Click;
+                filePictureBox.MouseDoubleClick += Card_DoubleClick;
                 filePictureBox.MouseDown += Card_MouseDown;
                 filePictureBox.MouseUp += Card_MouseUp;
                 filePictureBox.MouseMove += Card_MouseMove;
@@ -114,10 +115,11 @@ namespace PlayingCardsMarina
             }
         }
 
-        private void Card_Click(object sender, EventArgs e)
+        private void Card_DoubleClick(object sender, EventArgs e)
         {
+           
             var card = (PictureBox)sender;
-            //card.Location = new Point(10, 30);
+            card.Location = new Point(10, 40);
             card.BringToFront();
 
         }
@@ -125,7 +127,8 @@ namespace PlayingCardsMarina
         private void Card_MouseDown(object sender, MouseEventArgs e)
         {
             var card = (PictureBox)sender;
-            if(e.Button == MouseButtons.Left)
+            card.BringToFront();
+            if (e.Button == MouseButtons.Left)
             {
                 mouseHold = true;
                 deltaX = e.X;
@@ -150,10 +153,44 @@ namespace PlayingCardsMarina
             }
 
             var card = (PictureBox)sender;
-
+            
             card.Left = e.X + card.Left - deltaX;
             card.Top = e.Y + card.Top - deltaY ;
         }
 
+        private void FlipCards_Click(object sender, EventArgs e)
+        {
+            switch(cardsFlipped)
+            {
+                case true:
+                    ShowFrontImage();
+                    break;
+
+                case false:
+                    ShowBackImage();
+                    break;
+            }
+           
+            cardsFlipped = !cardsFlipped;
+        }
+
+        private void ShowBackImage()
+        {
+            string backImagePath = @"C:\Users\Installer\Desktop\Programming\Playing Cards\Playing Cards\playing_card_images\back\pink_back.png";
+            foreach (var card in cards)
+            {
+                card.Image = Image.FromFile(backImagePath);
+            }
+        }
+
+        private void ShowFrontImage()
+        {
+            for (int i = 0; i < 54; i++)
+            {
+                cards[i].Image = Image.FromFile(filePaths[i]);
+
+            }
+
+        }
     }
 }
